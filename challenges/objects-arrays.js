@@ -149,14 +149,16 @@ const contactInfo = graduates.map(
 console.log(contactInfo);
 
 /* Request 3: Find out how many universities have the string "Uni" included in their name. Create a new array called uni that contains them all. Log the result. */
-const uni = graduates.filter(currentElement => {
-  if (currentElement.university.search("Uni") != -1) {
-    console.log(currentElement.university);
-  }
-});
+{
+  let outputArray = [];
+  const uni = graduates.filter(currentElement => {
+    if (currentElement.university.search("Uni") != -1) {
+      outputArray.push(currentElement.university);
+    }
+  });
 
-console.log(uni);
-
+  console.log(outputArray);
+}
 // ==== ADVANCED Array Methods ====
 
 // Given this zoo data from around the United States, follow the instructions below.  Use the specific array methods in the requests below to solve the problems.
@@ -229,23 +231,27 @@ zooAnimals = [
 The zoo wants to display both the scientific name and the animal name in front of the habitats.  Return an array with only the animal and scientific names in it.  The individual values in the array should look like this "Name: Jackal, asiatic, Scientific: Canis aureus."
 
 */
-const animalNames = zooAnimals.forEach(currentElement => {
-  console.log(
-    `${currentElement.animal_name}, ${currentElement.scientific_name}`
-  );
-  currentElement = `${currentElement.animal_name}, ${
-    currentElement.scientific_name
-  }`;
-});
-console.log(animalNames);
+{
+  let outputArray = [];
+  const animalNames = zooAnimals.forEach(currentElement => {
+    currentElement = `Name: ${currentElement.animal_name}, Scientific: ${
+      currentElement.scientific_name
+    }`;
 
+    outputArray.push(currentElement);
+  });
+
+  console.log(outputArray);
+}
 /* Request 2: .map()    
 
 The zoos need a list of all their animal's names (names only, not scientific) converted to lower case.  Create a new array named lowerCase and map over each name to convert them all to lower case.  Log the resut.
 
 */
 
-const lowerCase = [];
+const lowerCase = zooAnimals.map(
+  currentElement => (currentElement = currentElement.animal_name.toLowerCase())
+);
 console.log(lowerCase);
 
 /* Request 3: .filter() 
@@ -253,15 +259,32 @@ console.log(lowerCase);
 The zoos are concenred about animals with a lower population count. Find out which animals have a population less than 5.
 
 */
-const lowerPopulation = [];
-console.log(lowerPopulation);
+{
+  let outputArray = [];
+  const lowerPopulation = zooAnimals.filter(currentElement => {
+    if (currentElement.population < 5) {
+      outputArray.push(
+        `${
+          currentElement.animal_name
+        } is endangered, with a current population of ${
+          currentElement.population
+        }`
+      );
+    }
+  });
 
+  console.log(outputArray);
+}
 /* Request 4: .reduce() 
 
 The zoos need to know their total animal population across the United States.  Find the total population from all the zoos using the .reduce() method.
 
 */
-const populationTotal = 0;
+const populationTotal = zooAnimals.reduce(
+  (total, currentValue) => total + currentValue.population,
+  0
+);
+
 console.log(populationTotal);
 
 /* 
